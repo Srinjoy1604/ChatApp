@@ -1,0 +1,13 @@
+.gridset
+{
+    grid-template-columns: repeat(2,1fr);
+    border: 1px solid white;
+    padding: 2%;
+    border-radius: 12px;
+    background-color: #070f30;
+}
+.gridset Input 
+{
+    background-color: rgb(234, 229, 229);
+    color: #070f30;
+}

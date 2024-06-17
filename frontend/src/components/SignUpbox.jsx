@@ -2,78 +2,98 @@ import React, { useState, useEffect } from "react";
 import { Button } from "./ui/button";
 import { Input } from "@/components/ui/input";
 import "../css/SignUpbox.css";
+import useAuth from "@/hooks/useAuth";
 
 function SignUpbox() {
-    const [username, setUsername] = useState("");
-    const [email, setEmail] = useState("");
-    const [password, setPassword] = useState("");
-    const [confirmPassword, setConfirmPassword] = useState("");
+    const { registerAction, authError, setAuthError } = useAuth();
+    const [details, setDetails] = useState({
+        name: "",
+        email: "",
+        pass: "",
+        cPass: ""
+    });
     const [error, setError] = useState("");
 
+    const onChange = (e) => {
+        const { name, value } = e.target;
+        setDetails({ ...details, [name]: value });
+    };
+
     useEffect(() => {
-        if (password && confirmPassword && password !== confirmPassword) {
+        const { pass, cPass } = details;
+        if (pass && cPass && pass !== cPass) {
             setError("Passwords do not match!");
         } else {
             setError("");
         }
-    }, [password, confirmPassword]);
+    }, [details.pass, details.cPass]);
+
+    useEffect(() => {
+        console.log(authError)
+    }, [authError])
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        if (password !== confirmPassword) {
+        const { name, email, pass, cPass } = details;
+        if (pass !== cPass) {
             setError("Passwords do not match!");
         } else {
             setError("");
-            
-            console.log("Form submitted", { username, email, password });
+            registerAction({ name, email, pass, cPass });
+            // console.log("Form submitted", { name, email, pass, cPass });
         }
     };
 
     return (
-        <div className="bg-slate-950 text-gray-50 p-2p rounded-2xl w-50p ">
+        <div className="bg-slate-950 text-gray-50 p-2p rounded-2xl w-50p">
             <form onSubmit={handleSubmit} className="grid place-items-center">
                 <h1 className="text-4xl">SignUp</h1>
                 <div className="grid place-items-center grid-flow-col m-2p w-full gridset">
                     <div><h2>Name</h2></div>
-                    <Input 
-                        type="text" 
-                        placeholder="Username" 
-                        className="m-2p mt-2" 
-                        value={username} 
-                        onChange={(e) => setUsername(e.target.value)} 
+                    <Input
+                        type="text"
+                        placeholder="Username"
+                        className="m-2p mt-2"
+                        name="name"
+                        value={details.name}
+                        onChange={onChange}
                     />
                 </div>
                 <div className="grid place-items-center grid-flow-col m-2p w-full gridset">
                     <div><h2>Email</h2></div>
-                    <Input 
-                        type="email" 
-                        placeholder="Email" 
-                        className="m-2p mt-2" 
-                        value={email} 
-                        onChange={(e) => setEmail(e.target.value)} 
+                    <Input
+                        type="email"
+                        placeholder="Email"
+                        className="m-2p mt-2"
+                        name="email"
+                        value={details.email}
+                        onChange={onChange}
                     />
                 </div>
                 <div className="grid place-items-center grid-flow-col m-2p w-full gridset">
                     <div><h2>Password</h2></div>
-                    <Input 
-                        type="password" 
-                        placeholder="Password" 
-                        className="m-2p mt-2" 
-                        value={password} 
-                        onChange={(e) => setPassword(e.target.value)} 
+                    <Input
+                        type="password"
+                        placeholder="Password"
+                        className="m-2p mt-2"
+                        name="pass"
+                        value={details.pass}
+                        onChange={onChange}
                     />
                 </div>
                 <div className="grid place-items-center grid-flow-col m-2p w-full gridset">
                     <div><h2>Confirm Password</h2></div>
-                    <Input 
-                        type="password" 
-                        placeholder="Confirm Password" 
-                        className="m-2p mt-2" 
-                        value={confirmPassword} 
-                        onChange={(e) => setConfirmPassword(e.target.value)} 
+                    <Input
+                        type="password"
+                        placeholder="Confirm Password"
+                        className="m-2p mt-2"
+                        name="cPass"
+                        value={details.cPass}
+                        onChange={onChange}
                     />
                 </div>
                 {error && <p className="text-red-500">{error}</p>}
+                {authError && <p className="text-red-500">{authError}</p>}
                 <Button variant="outline" type="submit" className="text-black">SignUp</Button>
             </form>
         </div>
@@ -81,4 +101,3 @@ function SignUpbox() {
 }
 
 export default SignUpbox;
-

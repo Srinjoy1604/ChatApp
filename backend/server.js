@@ -13,7 +13,7 @@ app.use(cors());
 
 app.options('*', cors()); // Handle preflight requests
 
-app.use('/users', userRoutes);
+app.use('/api/users', userRoutes);
 
 app.get("/", (req, res) => {
     res.json("hello");

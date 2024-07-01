@@ -3,8 +3,10 @@ import { Button } from "./ui/button";
 import { Input } from "@/components/ui/input";
 import "../css/SignUpbox.css";
 import useAuth from "@/hooks/useAuth";
+import {useNavigate } from "react-router-dom";
 
 function SignUpbox() {
+    const navigate = useNavigate()
     const { registerAction, authError, setAuthError } = useAuth();
     const [details, setDetails] = useState({
         name: "",
@@ -40,6 +42,7 @@ function SignUpbox() {
         } else {
             setError("");
             registerAction({ name, email, pass, cPass });
+            navigate('/success');
             // console.log("Form submitted", { name, email, pass, cPass });
         }
     };

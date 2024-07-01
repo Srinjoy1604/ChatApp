@@ -12,7 +12,11 @@ const userSchema = mongoose.Schema({
     password: {
         type: String,
         required: true
-    }
+    },
+    contacts:[{
+        type: String, 
+        required: true
+    }]
 })
 
 const UserModel = mongoose.model("User", userSchema);

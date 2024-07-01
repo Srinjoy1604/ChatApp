@@ -7,7 +7,7 @@ const auth = (req, res, next) => {
         return res.status(400).json({ error: 'no authorization header' })
     }
     if (!authHeader.startsWith('Bearer ')) {
-        return res.status(400).json({ error: 'invalid authorization header' })
+        return res.status(400).json({ error: 'invalid authorization header' });        
     }
     const token = authHeader.split(' ')[1]
     try {

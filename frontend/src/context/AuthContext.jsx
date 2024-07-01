@@ -1,20 +1,29 @@
 import axios from "axios"
+import { useEffect } from "react";
 import { createContext, useState } from "react"
-import { useNavigate } from "react-router-dom"
+import {useNavigate } from "react-router-dom";
+import { redirect } from "react-router-dom";
 
 export const AuthContext = createContext()
 
 const AuthProvider = ({ children }) => {
-    // const navigate = useNavigate()
-    const [auth, setAuth] = useState(false)
-    const [authError, setAuthError] = useState("")
-
+    const navigate = useNavigate();
+    const [auth, setAuth] = useState(false);
+    const [userData, setUserData] = useState(null);
+    const [authError, setAuthError] = useState("");
+    useEffect(() => {
+        if (auth) {
+          navigate('/chat');
+        }
+      },[auth]);
     const loginAction = async ({ email, body }) => {
         try {
             const response = await axios.post(`/api/users/${email}`, body)
             setAuth(true)
             localStorage.setItem('jwt', response.data.data.token)
-            console.log(response.data)
+            console.log(response.data);
+            setUserData(response.data);
+            
         } catch (error) {
             if (error.response) {
                 setAuthError(`server responded with error:: ${error.response.data.error}`)
@@ -56,7 +65,8 @@ const AuthProvider = ({ children }) => {
                 registerAction,
                 logoutAction,
                 authError,
-                setAuthError
+                setAuthError,
+                userData
             }}
         >
             {children}

@@ -1,0 +1,123 @@
+
+.Dashboard
+{
+    display: grid;
+    grid-template-columns: 0.5fr 1fr;
+    border: 1px solid black;
+}
+.FriendDiv
+{
+    background-color:rgb(32, 32, 32);
+    color: white;
+}
+.FriendDiv
+{
+    font-size: 2rem;
+}
+.FriendBox
+{
+    border: 1px solid black;
+    padding: 2%;
+    margin: 1%;
+    background-color: rgb(135, 90, 135);
+    height: 585px;
+    overflow: auto;
+    max-height:585px;
+    border-radius: 12px;
+    background-image: linear-gradient(to bottom, #270a3f, #1b4682, #0082b8, #00c1dd, #72fff2);
+}
+.Msgarea
+{
+    background-color: wheat;
+    background-color: rgb(90, 84, 152);
+    float:left;
+    min-height: 300px;
+    
+    overflow-y: auto;
+    padding: 0.5%;
+    border: 1px solid black;
+    
+}
+
+.MsgDiv 
+{
+    
+    padding: 2% 3%;
+    
+    
+}
+
+.MsgBlock
+{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    
+}
+.MsgDivsent 
+{
+    
+    padding: 2% 3%;
+    width: fit-content;
+    max-width: 50%;
+    
+}
+.Msgarea p
+{
+    margin: 2%;
+}
+.MsgDiv{
+    display: grid;
+    padding: 2%;
+    background-color: rgb(165, 234, 165);
+    max-width: 500px;
+    height: auto;
+    border: 1px black solid;
+    border-radius: 12px;
+    place-items: start;
+    padding: 5%;
+    margin: 1%;
+    
+    width: fit-content;
+    max-width: 50%;
+    align-self: flex-start;
+}
+.MsgDivsent
+{
+    padding: 1%;
+    background-color: rgb(148, 238, 243);
+    /* max-width: 500px; */
+    height: auto;
+    border: 1px black solid;
+    border-radius: 12px;
+    place-items: end;
+   
+    margin: 1%;
+    margin-top: 5%;
+    width: fit-content;
+    max-width: 50%;
+    align-self: flex-end;
+}
+.Msgform
+{
+    background-color: rgb(54, 54, 54);
+}
+.ChatBlock
+{
+    display: flex;
+    flex-direction: column;
+    text-align: start;
+}
+.FriendBar
+{
+    background-color: wheat;
+    width: 100%;
+    /* height: 100%; */
+    margin: 0;
+    padding: 2%;
+    border: 2px solid black;
+    color: white;
+    background-color: rgb(43, 43, 43);
+   
+   
+}

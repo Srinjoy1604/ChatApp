@@ -25,7 +25,7 @@ const registerUser = async (req, res) => {
         }
         const salt = await bcrypt.genSalt(10)
         const hashedPass = await bcrypt.hash(pass, salt)
-        const newUser = new UserModel({ name, email, password: hashedPass })
+        const newUser = new UserModel({ name, email, password: hashedPass , contacts:[]})
         await newUser.save()
         res.status(200).send({ message: 'user created, proceed to login', })
     } catch (e) {
@@ -53,9 +53,10 @@ const loginUser = async (req, res) => {
             message: 'login success',
             data: {
                 token,
-                user: { name: user.name, email: user.email }
+                user: { name: user.name, email: user.email , contacts:user.contacts}
             }
-        })
+        });
+        
     } catch (e) {
         res.status(200).json({ message: `error ${e.message}` })
     }
